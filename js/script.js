@@ -47,3 +47,18 @@ function playRound (playerSelection, computerSelection) {
     }
 
 }
+
+function getValidInput () {
+    //while input is invalid, ask for player to input properly
+    //when input is valid, return the input
+    while (true) {
+        let input = prompt("What is your choice? Rock, paper or scissors?");
+    //make input lower case, in order to make it case insensitive
+        input = input.toLowerCase();
+        if(input === "rock" || input === "paper" || input === "scissors"){
+            return input;
+        } else {
+            alert("Input not valid! Please try again!");
+        }
+    }
+}
