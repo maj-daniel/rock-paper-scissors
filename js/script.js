@@ -40,7 +40,7 @@ function playRound (playerSelection, computerSelection) {
             case "rock":
                 return -1;
             case "paper":
-                return "Player win";
+                return 1;
         }
     } else {
         return "Invalid input! Please try rock, paper or scissors!"
