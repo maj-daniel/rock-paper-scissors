@@ -62,3 +62,35 @@ function getValidInput () {
         }
     }
 }
+
+function game() {
+    //create variable score, initialized with 0
+    let score = 0;
+
+
+    //run it five times: sum the score with the value of the round (1, 0 and -1) using the user input in a prompt and a random choice from the computer
+    for (let i = 0; i < 5; i++){
+        const roundScore = playRound(getValidInput(), getComputerChoice());
+        score += roundScore
+        switch (roundScore) {
+            case 1:
+                console.log("Player Win!");
+                break;
+            case 0:
+                console.log("Tie!");
+                break;
+            case (-1):
+                console.log("Computer Win!");
+                break;
+        }
+    }
+
+    //if score > 1, it's a win, if score < 0, it's a lost and if score = 0, tie
+    if (score > 0){
+        console.log("Player Won The Gsame!");
+    } else if (score < 0){
+        console.log("Computer Won The Game!");
+    } else {
+        console.log("It's A Tie!");
+    }
+}
