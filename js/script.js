@@ -30,7 +30,7 @@ function playRound (playerSelection, computerSelection) {
                 return 0;
             case "scissors":
                 return -1;
-            case "rocks":
+            case "rock":
                 return 1;
         }
     } else if (playerSelection === "scissors"){
@@ -42,10 +42,7 @@ function playRound (playerSelection, computerSelection) {
             case "paper":
                 return 1;
         }
-    } else {
-        return "Invalid input! Please try rock, paper or scissors!"
     }
-
 }
 
 function getValidInput () {
@@ -70,7 +67,7 @@ function game() {
 
     //run it five times: sum the score with the value of the round (1, 0 and -1) using the user input in a prompt and a random choice from the computer
     for (let i = 0; i < 5; i++){
-        const roundScore = playRound(getValidInput(), getComputerChoice());
+        let roundScore = playRound(getValidInput(), getComputerChoice());
         score += roundScore
         switch (roundScore) {
             case 1:
@@ -87,7 +84,7 @@ function game() {
 
     //if score > 1, it's a win, if score < 0, it's a lost and if score = 0, tie
     if (score > 0){
-        console.log("Player Won The Gsame!");
+        console.log("Player Won The Game!");
     } else if (score < 0){
         console.log("Computer Won The Game!");
     } else {
