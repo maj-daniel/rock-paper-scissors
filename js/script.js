@@ -12,9 +12,8 @@ function getComputerChoice (){
 }
 
 function playRound (playerSelection, computerSelection) {
-    //if playerChoice is rock, paper or scissors, test each possibility of result
+    //if playerSelection is rock, paper or scissors, test for each possibility of result
     //return 1 if win, -1 if lose and 0 for a tie
-    //else, say to player to give a compatible input.
     if (playerSelection === "rock"){
         switch (computerSelection) {
             case "rock":
