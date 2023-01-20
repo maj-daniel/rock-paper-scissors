@@ -1,4 +1,4 @@
-function getComputerChoice (){
+function getComputerChoice() {
     //Pass a random integer from 0 - 2 to a switch and return one of the strings (rock, paper or scissors), acording to the integer 
     const choice = Math.floor(Math.random() * 3);
     switch (choice) {
@@ -11,11 +11,11 @@ function getComputerChoice (){
     }
 }
 
-function playRound (playerSelection, computerSelection) {
+function playRound(playerSelection) {
     //if playerSelection is rock, paper or scissors, test for each possibility of result
     //return 1 if win, -1 if lose and 0 for a tie
     if (playerSelection === "rock"){
-        switch (computerSelection) {
+        switch (getComputerChoice()) {
             case "rock":
                 return 0;
             case "paper":
@@ -24,7 +24,7 @@ function playRound (playerSelection, computerSelection) {
                 return 1;
         }
     } else if (playerSelection === "paper"){
-        switch (computerSelection) {
+        switch (getComputerChoice()) {
             case "paper":
                 return 0;
             case "scissors":
@@ -33,7 +33,7 @@ function playRound (playerSelection, computerSelection) {
                 return 1;
         }
     } else if (playerSelection === "scissors"){
-        switch (computerSelection) {
+        switch (getComputerChoice()) {
             case "scissors":
                 return 0;
             case "rock":
@@ -44,49 +44,33 @@ function playRound (playerSelection, computerSelection) {
     }
 }
 
-function getValidInput () {
-    //while input is invalid, ask for player to input properly
-    //when input is valid, return the input
-    while (true) {
-        let input = prompt("What is your choice? Rock, paper or scissors?");
-    //make input lower case, in order to make it case insensitive
-        input = input.toLowerCase();
-        if(input === "rock" || input === "paper" || input === "scissors"){
-            return input;
+function game(e) {
+    let roundScore = playRound(e.target.id);
+    //change score
+    if (roundScore > 0 && humanScore < 5 | machineScore < 5){
+        humanScore++;
+    } else if (roundScore < 0 && humanScore < 5 | machineScore < 5){
+        machineScore++;
+    }
+
+    if (humanScore > 4 || machineScore > 4){//check if someone has already won
+        if (humanScore > machineScore){
+            return board.textContent = "HUMAN WON!";
         } else {
-            alert("Input not valid! Please try again!");
+            return board.textContent = "MACHINE WON!";
         }
+    } else { //update scoreboard
+        board.textContent = `Human Score = ${humanScore}   Machine Score = ${machineScore}`;
     }
 }
 
-function game() {
-    //create variable score, initialized with 0
-    let score = 0;
+const btns = document.querySelectorAll("button");
+const board = document.querySelector("#board");
+board.textContent = "Human Score = 0 Machine Score = 0";
 
+let humanScore = 0;
+let machineScore = 0;
 
-    //run it five times: sum the score with the value of the round (1, 0 and -1) using the user input in a prompt and a random choice from the computer
-    for (let i = 0; i < 5; i++){
-        let roundScore = playRound(getValidInput(), getComputerChoice());
-        score += roundScore
-        switch (roundScore) {
-            case 1:
-                console.log("Player Win!");
-                break;
-            case 0:
-                console.log("Tie!");
-                break;
-            case (-1):
-                console.log("Computer Win!");
-                break;
-        }
-    }
-
-    //if score > 1, it's a win, if score < 0, it's a lost and if score = 0, tie
-    if (score > 0){
-        console.log("Player Won The Game!");
-    } else if (score < 0){
-        console.log("Computer Won The Game!");
-    } else {
-        console.log("It's A Tie!");
-    }
-}
+btns.forEach(btn => {
+    btn.addEventListener("click", game);
+});
